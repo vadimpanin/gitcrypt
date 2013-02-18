@@ -3,15 +3,13 @@ gitcrypt
 
 Allows to transparently encrypt repository contents with AES 256. The main advantage is that no additional software needed to be installed in untrusted location. Files are automatically encrypted on the fly when doing git push from trusted location.
 
-tcrypt v0.01
-Allows to transparently encrypt repository contents with AES 256 using smudge, clean and diff filters.
+Transparent encryption is implemented in clean, smudge and diff filters.
 
-The main advantage is that no additional software (except git) should be installed in
-untrusted location. Files are automatically encrypted on the fly when doing git push
-from trusted location.
+Full conversion chain is like this: source -> line delimiter -> Zlib -> AES 256 -> Base64.
 
-Full conversion chain is: source -> line delimiter -> Zlib -> AES 256 -> Base64.
-Filename encryption is not supported.
+Please note the following:
+*Filename encryption is not supported.
+*Stream cipher mode is not supported as it would break diff functionality. Every line is encrypted separately.
 
 Building
 ========
@@ -23,8 +21,6 @@ You'll need the following dependencies:
 
 	apt-get libboost-dev libz-dev libssl-dev
 	make
-
-Please note: gcc 4.3 and boost <1.40 can be not quite compatible.
 
 Installing
 ==========
