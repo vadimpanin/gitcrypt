@@ -44,11 +44,11 @@ Creating new encrypted repository:
 2. Clone it to trusted location (your laptop).
 3. Add next lines to .git/config of your cloned repository (or just run `gitcrypt init`):
 
-    [filter "gitcrypt"]
-        smudge = gitcrypt decrypt --key <KEY>
-        clean = gitcrypt encrypt --key <KEY>
-    [diff "gitcrypt"]
-        textconv = gitcrypt decrypt --key <KEY> --out - --in
+<pre>[filter "gitcrypt"]
+    smudge = gitcrypt decrypt --key <KEY>
+    clean = gitcrypt encrypt --key <KEY>
+[diff "gitcrypt"]
+    textconv = gitcrypt decrypt --key <KEY> --out - --in</pre>
 
 4. Create if necessary and add next line to .git/info/attributes:
    (skip this step if you ran `gitcrypt init` on the prevoius step)
